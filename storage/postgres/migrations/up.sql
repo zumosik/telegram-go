@@ -1,0 +1,5 @@
+CREATE TABLE pages (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    url VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL
+);

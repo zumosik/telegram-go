@@ -25,7 +25,7 @@ func New(basePath string) Storage {
 	}
 }
 
-func (s Storage) Save(page *storage.Page) (err error) {
+func (s Storage) Save(page *storage.Page) error {
 	const errorMsg = "can't save page"
 
 	fPath := filepath.Join(s.basePath, page.UserName)
@@ -126,7 +126,7 @@ func (s Storage) Remove(p *storage.Page) error {
 func (s Storage) IsExists(p *storage.Page) (bool, error) {
 	fName, err := fileName(p)
 	if err != nil {
-		return false, e.Wrap("can't check is file exists", err)
+		return false, e.Wrap("can't check if file exists", err)
 	}
 
 	path := filepath.Join(s.basePath, p.UserName, fName)
@@ -135,7 +135,7 @@ func (s Storage) IsExists(p *storage.Page) (bool, error) {
 	case errors.Is(err, os.ErrNotExist):
 		return false, nil
 	case err != nil:
-		return false, e.Wrap(fmt.Sprintf("can't chech is file exists %s", path), err)
+		return false, e.Wrap(fmt.Sprintf("can't check if file exists %s", path), err)
 	}
 
 	return true, nil
